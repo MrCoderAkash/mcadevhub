@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mr. Coder Akash - LinkTree</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <div class="container">
+    <img src="my_logo.jpeg" alt="Logo" class="logo" />
+    <h1>@mr.coder.akash</h1>
+    <p>💻 Web Dev | 💼 Freelancer | 🎥 Code Creator</p>
+    <small>Build. Teach. Inspire.</small>
+
+    <div class="link-wrapper">
+
+      <!-- YouTube -->
+      <div class="card" data-url="https://youtube.com/yourchannel">
+        <div class="card-inner">
+          <div class="card-front">
+            <span><i class="fab fa-youtube"></i> YouTube</span>
+            <span class="dots">⋮</span>
+          </div>
+          <div class="card-back">📹 Tutorials, projects & dev tips</div>
+        </div>
+      </div>
+
+      <!-- Telegram -->
+      <div class="card" data-url="https://t.me/yourtelegram">
+        <div class="card-inner">
+          <div class="card-front">
+            <span><i class="fab fa-telegram"></i> Telegram</span>
+            <span class="dots">⋮</span>
+          </div>
+          <div class="card-back">💬 Code updates & direct access</div>
+        </div>
+      </div>
+
+      <!-- Website -->
+      <div class="card" data-url="https://yourwebsite.com">
+        <div class="card-inner">
+          <div class="card-front">
+            <span><i class="fas fa-globe"></i> Website</span>
+            <span class="dots">⋮</span>
+          </div>
+          <div class="card-back">🌐 Portfolio, blogs & resources</div>
+        </div>
+      </div>
+
+      <!-- Instagram -->
+      <div class="card" data-url="https://instagram.com/yourusername">
+        <div class="card-inner">
+          <div class="card-front">
+            <span><i class="fab fa-instagram"></i> Instagram</span>
+            <span class="dots">⋮</span>
+          </div>
+          <div class="card-back">📸 Behind the scenes & reels</div>
+        </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="card" data-url="https://linkedin.com/in/yourprofile">
+        <div class="card-inner">
+          <div class="card-front">
+            <span><i class="fab fa-linkedin"></i> LinkedIn</span>
+            <span class="dots">⋮</span>
+          </div>
+          <div class="card-back">📇 Resume, collabs & network</div>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="card" data-url="https://wa.me/91XXXXXXXXXX">
+        <div class="card-inner">
+          <div class="card-front">
+            <span><i class="fab fa-whatsapp"></i> WhatsApp</span>
+            <span class="dots">⋮</span>
+          </div>
+          <div class="card-back">📲 Chat or collab directly</div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>🔗 Made by <strong>Mr Coder Akash</strong> | Trust My Code</footer>
+  </div>
+<script>
+  const cards = document.querySelectorAll('.card');
+  let activeCard = null;
+
+  function isDesktop() {
+    return window.innerWidth > 768;
+  }
+
+  cards.forEach(card => {
+    const dots = card.querySelector('.dots');
+
+    // Toggle info on dots click
+    dots.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      const isActive = card.classList.contains('show-info');
+      cards.forEach(c => {
+        c.classList.remove('show-info');
+        c.classList.remove('always-glow');
+      });
+
+      if (!isActive) {
+        card.classList.add('show-info');
+        if (!isDesktop()) {
+          card.classList.add('always-glow'); // glow only on mobile when open
+        }
+        activeCard = card;
+      } else {
+        activeCard = null;
+      }
+    });
+
+    // On card click (not dots), open link
+    card.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('dots') && !card.classList.contains('show-info')) {
+        window.open(card.getAttribute('data-url'), '_blank');
+      }
+    });
+
+    // Desktop: close info on mouse leave
+    card.addEventListener('mouseleave', () => {
+      if (isDesktop()) {
+        card.classList.remove('show-info');
+        card.classList.remove('always-glow');
+        if (activeCard === card) activeCard = null;
+      }
+    });
+  });
+
+  // Close all info if clicked outside
+  document.body.addEventListener('click', (e) => {
+    if (!e.target.closest('.card')) {
+      cards.forEach(c => {
+        c.classList.remove('show-info');
+        c.classList.remove('always-glow');
+      });
+      activeCard = null;
+    }
+  });
+</script>
+
+
+</body>
+</html>
